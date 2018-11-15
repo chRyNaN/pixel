@@ -1,0 +1,3 @@
+package com.chrynan.inlinepixel
+
+interface ScreenDimensionUnit

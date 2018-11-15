@@ -1,0 +1,5 @@
+rootProject.name = 'inline-pixel'
+include ':common'
+include ':common-jvm'
+include ':common-js'
+include ':android'
