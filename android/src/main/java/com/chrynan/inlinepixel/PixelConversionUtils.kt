@@ -4,8 +4,6 @@ package com.chrynan.inlinepixel
 
 import android.content.Context
 import android.content.res.Resources
-import android.util.DisplayMetrics
-import android.view.WindowManager
 
 fun Context.convertDipToPx(dip: DependencyIndependentPixels) = resources.convertDipToPx(dip)
 
@@ -31,47 +29,29 @@ fun Context.convertSpToDip(sp: ScaledPixels) = resources.convertSpToDip(sp)
 
 fun Resources.convertSpToDip(sp: ScaledPixels) = convertPxToDip(convertSpToPx(sp))
 
-fun Context.convertPxToPt(px: Pixels) {
-    //val screenSize = getScreenWindowSize()
-    //val isPortraitOrientation = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-    //val displayMetrics = screenWindowDisplayMetrics()
+fun Context.convertPxToPt(px: Pixels) = resources.convertPxToPt(px)
 
-    // TODO figure out the point pixel conversions
-    // 1 / 72
+fun Resources.convertPxToPt(px: Pixels) = PointPixels((px.value / (displayMetrics.densityDpi / 72f)).toInt())
 
-    TODO("PointPixels Conversions Are Not Implemented Yet.")
-}
+fun Context.convertPtToPx(pt: PointPixels) = resources.convertPtToPx(pt)
 
-internal fun Context.screenWindowManager() =
-    applicationContext.getSystemService(WindowManager::class.java) as WindowManager
+fun Resources.convertPtToPx(pt: PointPixels) = Pixels((pt.value * (displayMetrics.densityDpi / 72f)).toInt())
 
-internal fun Context.screenWindowDisplayMetrics(): DisplayMetrics {
-    val displayMetrics = DisplayMetrics()
-    screenWindowManager().defaultDisplay.getMetrics(displayMetrics)
-    return displayMetrics
-}
+fun Context.convertDipToPt(dip: DependencyIndependentPixels) = resources.convertDipToPt(dip)
 
-internal fun Context.getScreenWindowSize(): ScreenSize {
-    val displayMetrics = screenWindowDisplayMetrics()
+fun Resources.convertDipToPt(dip: DependencyIndependentPixels) = convertPxToPt(convertDipToPx(dip))
 
-    val widthPixels = displayMetrics.widthPixels
-    val heightPixels = displayMetrics.heightPixels
+fun Context.convertPtToDip(pt: PointPixels) = resources.convertPtToDip(pt)
 
-    val densityDpi = displayMetrics.densityDpi
+fun Resources.convertPtToDip(pt: PointPixels) = convertPxToDip(convertPtToPx(pt))
 
-    val wi = widthPixels / densityDpi
-    val hi = heightPixels / densityDpi
+fun Context.convertSpToPt(sp: ScaledPixels) = resources.convertSpToPt(sp)
 
-    val widthInches = Math.pow(wi.toDouble(), 2.0)
-    val heightInches = Math.pow(hi.toDouble(), 2.0)
+fun Resources.convertSpToPt(sp: ScaledPixels) = convertPxToPt(convertSpToPx(sp))
 
-    return ScreenSize(widthInches = widthInches.toInt(), heightInches = heightInches.toInt())
-}
+fun Context.convertPtToSp(pt: PointPixels) = resources.convertPtToSp(pt)
 
-internal data class ScreenSize(
-    val widthInches: Int,
-    val heightInches: Int
-)
+fun Resources.convertPtToSp(pt: PointPixels) = convertPxToSp(convertPtToPx(pt))
 
 interface ScreenDimensionUnitConverter {
 
@@ -106,35 +86,23 @@ class ContextScreenDimensionUnitConverter(private val context: Context) : Screen
 
     override fun Pixels.toSp() = context.convertPxToSp(this)
 
-    override fun Pixels.toPt(): PointPixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun Pixels.toPt() = context.convertPxToPt(this)
 
     override fun DependencyIndependentPixels.toPx() = context.convertDipToPx(this)
 
     override fun DependencyIndependentPixels.toSp() = context.convertDipToSp(this)
 
-    override fun DependencyIndependentPixels.toPt(): PointPixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun DependencyIndependentPixels.toPt() = context.convertDipToPt(this)
 
     override fun ScaledPixels.toPx() = context.convertSpToPx(this)
 
     override fun ScaledPixels.toDip() = context.convertSpToDip(this)
 
-    override fun ScaledPixels.toPt(): PointPixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun ScaledPixels.toPt() = context.convertSpToPt(this)
 
-    override fun PointPixels.toPx(): Pixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun PointPixels.toPx() = context.convertPtToPx(this)
 
-    override fun PointPixels.toDip(): DependencyIndependentPixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun PointPixels.toDip() = context.convertPtToDip(this)
 
-    override fun PointPixels.toSp(): ScaledPixels {
-        TODO("PointPixels Conversions Are Not Implemented Yet.")
-    }
+    override fun PointPixels.toSp() = context.convertPtToSp(this)
 }

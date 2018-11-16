@@ -5,7 +5,6 @@ package com.chrynan.inlinepixel
 import android.content.res.TypedArray
 import android.view.View
 
-
 fun TypedArray.getDimensionPixelOffset(index: Int, defaultValue: Pixels) =
     Pixels(getDimensionPixelOffset(index, defaultValue.value))
 
