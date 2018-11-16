@@ -4,6 +4,7 @@ package com.chrynan.inlinepixel
 
 import android.content.Context
 import android.content.res.Resources
+import android.view.View
 
 fun Context.convertDipToPx(dip: DependencyIndependentPixels) = resources.convertDipToPx(dip)
 
@@ -106,3 +107,9 @@ class ContextScreenDimensionUnitConverter(private val context: Context) : Screen
 
     override fun PointPixels.toSp() = context.convertPtToSp(this)
 }
+
+fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
+    conversionBlock(ContextScreenDimensionUnitConverter(this))
+
+fun <R> View.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
+    conversionBlock(ContextScreenDimensionUnitConverter(context!!))
