@@ -4,6 +4,12 @@ apply plugin: 'maven'
 group 'com.chrynan'
 version rootProject.ext.libraryVersion
 
+compileKotlin2Js{
+    kotlinOptions {
+        freeCompilerArgs = ['-XXLanguage:+InlineClasses']
+    }
+}
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js"
 

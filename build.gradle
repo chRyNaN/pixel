@@ -25,11 +25,4 @@ allprojects {
         google()
         jcenter()
     }
-
-    // Allows use of Experimental Kotlin features, such as, Kotlin Contracts
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            freeCompilerArgs = ['-XXLanguage:+InlineClasses']
-        }
-    }
 }

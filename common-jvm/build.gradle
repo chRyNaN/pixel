@@ -5,6 +5,12 @@ apply plugin: 'maven'
 group 'com.chrynan'
 version rootProject.ext.libraryVersion
 
+compileKotlin{
+    kotlinOptions {
+        freeCompilerArgs = ['-XXLanguage:+InlineClasses']
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
 
