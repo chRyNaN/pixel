@@ -2,6 +2,7 @@
 
 package com.chrynan.inlinepixel
 
+import android.app.Activity
 import android.content.res.TypedArray
 import android.view.View
 
@@ -70,3 +71,12 @@ val View.verticalScrollbarPositionPx
 
 val View.verticalScrollbarWidthPx
     get() = Pixels(verticalScrollbarWidth)
+
+fun Activity.pixelExtra(key: String, defaultValue: Pixels) =
+    lazy { Pixels(intent?.getIntExtra(key, defaultValue.value) ?: defaultValue.value) }
+
+fun Activity.pixelExtraOrNull(key: String): Lazy<Pixels?> = lazy {
+    intent?.let {
+        if (it.hasExtra(key)) Pixels(it.getIntExtra(key, -1)) else null
+    }
+}
