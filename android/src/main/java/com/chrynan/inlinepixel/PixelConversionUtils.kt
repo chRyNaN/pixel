@@ -108,8 +108,18 @@ class ContextScreenDimensionUnitConverter(private val context: Context) : Screen
     override fun PointPixels.toSp() = context.convertPtToSp(this)
 }
 
-fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
+inline fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
     conversionBlock(ContextScreenDimensionUnitConverter(this))
 
-fun <R> View.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
+inline fun <R> View.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
     conversionBlock(ContextScreenDimensionUnitConverter(context!!))
+
+inline fun <U : ScreenDimensionUnit, R : ScreenDimensionUnit> Context.convert(
+    unit: U,
+    conversionBlock: ScreenDimensionUnitConverter.(U) -> R
+): R = conversionBlock(ContextScreenDimensionUnitConverter(this), unit)
+
+inline fun <U : ScreenDimensionUnit, R : ScreenDimensionUnit> View.convert(
+    unit: U,
+    conversionBlock: ScreenDimensionUnitConverter.(U) -> R
+): R = conversionBlock(ContextScreenDimensionUnitConverter(context), unit)
