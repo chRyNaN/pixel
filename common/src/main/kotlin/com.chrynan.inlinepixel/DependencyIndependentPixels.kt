@@ -2,6 +2,9 @@
 
 package com.chrynan.inlinepixel
 
+/**
+ * Represents a Device Independent Pixel similar to Android's Dip/Dp values.
+ */
 inline class DependencyIndependentPixels(val value: Int) : ScreenDimensionUnit,
     Comparable<DependencyIndependentPixels> {
 

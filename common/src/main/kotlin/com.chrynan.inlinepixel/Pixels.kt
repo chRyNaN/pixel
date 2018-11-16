@@ -2,6 +2,9 @@
 
 package com.chrynan.inlinepixel
 
+/**
+ * Represents Physical Pixels for a device's screen.
+ */
 inline class Pixels(val value: Int) : ScreenDimensionUnit,
     Comparable<Pixels> {
 
