@@ -79,6 +79,14 @@ interface ScreenDimensionUnitConverter {
     fun PointPixels.toDip(): DependencyIndependentPixels
 
     fun PointPixels.toSp(): ScaledPixels
+
+    fun ScreenDimensionUnit.toPx(): Pixels
+
+    fun ScreenDimensionUnit.toDip(): DependencyIndependentPixels
+
+    fun ScreenDimensionUnit.toSp(): ScaledPixels
+
+    fun ScreenDimensionUnit.toPt(): PointPixels
 }
 
 class ContextScreenDimensionUnitConverter(private val context: Context) : ScreenDimensionUnitConverter {
@@ -106,6 +114,58 @@ class ContextScreenDimensionUnitConverter(private val context: Context) : Screen
     override fun PointPixels.toDip() = context.convertPtToDip(this)
 
     override fun PointPixels.toSp() = context.convertPtToSp(this)
+
+    override fun ScreenDimensionUnit.toPx() =
+        when (this) {
+            is Pixels -> this
+            is DependencyIndependentPixels -> context.convertDipToPx(this)
+            is ScaledPixels -> context.convertSpToPx(this)
+            is PointPixels -> context.convertPtToPx(this)
+            else -> throw UnsupportedConversionException(
+                classToConvert = this::class,
+                conversionType = Pixels::class,
+                message = "Cannot convert unknown type to ${Pixels::class}."
+            )
+        }
+
+    override fun ScreenDimensionUnit.toDip() =
+        when (this) {
+            is DependencyIndependentPixels -> this
+            is Pixels -> context.convertPxToDip(this)
+            is ScaledPixels -> context.convertSpToDip(this)
+            is PointPixels -> context.convertPtToDip(this)
+            else -> throw UnsupportedConversionException(
+                classToConvert = this::class,
+                conversionType = DependencyIndependentPixels::class,
+                message = "Cannot convert unknown type to ${DependencyIndependentPixels::class}."
+            )
+        }
+
+    override fun ScreenDimensionUnit.toSp() =
+        when (this) {
+            is ScaledPixels -> this
+            is DependencyIndependentPixels -> context.convertDipToSp(this)
+            is Pixels -> context.convertPxToSp(this)
+            is PointPixels -> context.convertPtToSp(this)
+            else -> throw UnsupportedConversionException(
+                classToConvert = this::class,
+                conversionType = ScaledPixels::class,
+                message = "Cannot convert unknown type to ${ScaledPixels::class}."
+            )
+        }
+
+    override fun ScreenDimensionUnit.toPt() =
+        when (this) {
+            is PointPixels -> this
+            is DependencyIndependentPixels -> context.convertDipToPt(this)
+            is ScaledPixels -> context.convertSpToPt(this)
+            is Pixels -> context.convertPxToPt(this)
+            else -> throw UnsupportedConversionException(
+                classToConvert = this::class,
+                conversionType = PointPixels::class,
+                message = "Cannot convert unknown type to ${PointPixels::class}."
+            )
+        }
 }
 
 inline fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
