@@ -5,7 +5,7 @@ apply plugin: 'maven'
 group 'com.chrynan'
 version rootProject.ext.libraryVersion
 
-compileKotlin{
+compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ['-XXLanguage:+InlineClasses']
     }
