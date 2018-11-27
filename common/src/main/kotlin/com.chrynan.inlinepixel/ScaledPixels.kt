@@ -8,6 +8,12 @@ package com.chrynan.inlinepixel
 inline class ScaledPixels(val value: Int) : ScreenDimensionUnit,
     Comparable<ScaledPixels> {
 
+    override val isConstantPhysicalSize
+        get() = false
+
+    override val isDensityIndependent
+        get() = true
+
     override fun compareTo(other: ScaledPixels): Int = value.compareTo(other.value)
 
     override fun toString() = "{ScaledPixels: $value}"

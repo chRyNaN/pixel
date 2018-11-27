@@ -1,3 +1,8 @@
 package com.chrynan.inlinepixel
 
-interface ScreenDimensionUnit
+interface ScreenDimensionUnit {
+
+    val isConstantPhysicalSize: Boolean
+
+    val isDensityIndependent: Boolean
+}

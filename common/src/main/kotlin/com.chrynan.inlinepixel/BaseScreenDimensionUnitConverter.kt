@@ -5,7 +5,7 @@ package com.chrynan.inlinepixel
 open class BaseScreenDimensionUnitConverter(private val converterFactorProvider: ConversionFactorProvider) :
     ScreenDimensionUnitConverter {
 
-    override fun ScreenDimensionUnit.toPx(): Pixels =
+    override fun ScreenDimensionUnit.toPx() =
         when (this) {
             is Pixels -> this
             is DependencyIndependentPixels -> convertDipToPx(this)
@@ -18,7 +18,7 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             )
         }
 
-    override fun ScreenDimensionUnit.toDip(): DependencyIndependentPixels =
+    override fun ScreenDimensionUnit.toDip() =
         when (this) {
             is DependencyIndependentPixels -> this
             is Pixels -> convertPxToDip(this)
@@ -31,7 +31,7 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             )
         }
 
-    override fun ScreenDimensionUnit.toSp(): ScaledPixels =
+    override fun ScreenDimensionUnit.toSp() =
         when (this) {
             is ScaledPixels -> this
             is DependencyIndependentPixels -> convertDipToSp(this)
@@ -44,7 +44,7 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             )
         }
 
-    override fun ScreenDimensionUnit.toPt(): PointPixels =
+    override fun ScreenDimensionUnit.toPt() =
         when (this) {
             is PointPixels -> this
             is DependencyIndependentPixels -> convertDipToPt(this)

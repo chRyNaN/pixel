@@ -8,6 +8,12 @@ package com.chrynan.inlinepixel
 inline class Pixels(val value: Int) : ScreenDimensionUnit,
     Comparable<Pixels> {
 
+    override val isConstantPhysicalSize
+        get() = false
+
+    override val isDensityIndependent
+        get() = false
+
     override fun compareTo(other: Pixels): Int = value.compareTo(other.value)
 
     override fun toString() = "{Pixels: $value}"
