@@ -124,6 +124,9 @@ class ContextConversionFactorProvider(context: Context) : ConversionFactorProvid
         context.resources.displayMetrics.densityDpi / ConversionFactorProvider.POINT_PIXELS_PER_INCH
 }
 
+class ContextScreenDimensionUnitConverter(context: Context) :
+    BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(context))
+
 inline fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
     conversionBlock(BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(this)))
 

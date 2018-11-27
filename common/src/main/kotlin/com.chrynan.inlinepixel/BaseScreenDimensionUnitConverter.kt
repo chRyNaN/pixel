@@ -2,7 +2,7 @@
 
 package com.chrynan.inlinepixel
 
-class BaseScreenDimensionUnitConverter(private val converterFactorProvider: ConversionFactorProvider) :
+open class BaseScreenDimensionUnitConverter(private val converterFactorProvider: ConversionFactorProvider) :
     ScreenDimensionUnitConverter {
 
     override fun ScreenDimensionUnit.toPx(): Pixels =
