@@ -114,132 +114,28 @@ fun Resources.convertToPt(unit: ScreenDimensionUnit) =
         )
     }
 
-interface ScreenDimensionUnitConverter {
+class ContextConversionFactorProvider(context: Context) : ConversionFactorProvider {
 
-    fun Pixels.toDip(): DependencyIndependentPixels
+    override val dipToPxFactor = context.resources.displayMetrics.density
 
-    fun Pixels.toSp(): ScaledPixels
+    override val spToPxFactor = context.resources.displayMetrics.scaledDensity
 
-    fun Pixels.toPt(): PointPixels
-
-    fun DependencyIndependentPixels.toPx(): Pixels
-
-    fun DependencyIndependentPixels.toSp(): ScaledPixels
-
-    fun DependencyIndependentPixels.toPt(): PointPixels
-
-    fun ScaledPixels.toPx(): Pixels
-
-    fun ScaledPixels.toDip(): DependencyIndependentPixels
-
-    fun ScaledPixels.toPt(): PointPixels
-
-    fun PointPixels.toPx(): Pixels
-
-    fun PointPixels.toDip(): DependencyIndependentPixels
-
-    fun PointPixels.toSp(): ScaledPixels
-
-    fun ScreenDimensionUnit.toPx(): Pixels
-
-    fun ScreenDimensionUnit.toDip(): DependencyIndependentPixels
-
-    fun ScreenDimensionUnit.toSp(): ScaledPixels
-
-    fun ScreenDimensionUnit.toPt(): PointPixels
-}
-
-class ContextScreenDimensionUnitConverter(private val context: Context) : ScreenDimensionUnitConverter {
-
-    override fun Pixels.toDip() = context.convertPxToDip(this)
-
-    override fun Pixels.toSp() = context.convertPxToSp(this)
-
-    override fun Pixels.toPt() = context.convertPxToPt(this)
-
-    override fun DependencyIndependentPixels.toPx() = context.convertDipToPx(this)
-
-    override fun DependencyIndependentPixels.toSp() = context.convertDipToSp(this)
-
-    override fun DependencyIndependentPixels.toPt() = context.convertDipToPt(this)
-
-    override fun ScaledPixels.toPx() = context.convertSpToPx(this)
-
-    override fun ScaledPixels.toDip() = context.convertSpToDip(this)
-
-    override fun ScaledPixels.toPt() = context.convertSpToPt(this)
-
-    override fun PointPixels.toPx() = context.convertPtToPx(this)
-
-    override fun PointPixels.toDip() = context.convertPtToDip(this)
-
-    override fun PointPixels.toSp() = context.convertPtToSp(this)
-
-    override fun ScreenDimensionUnit.toPx() =
-        when (this) {
-            is Pixels -> this
-            is DependencyIndependentPixels -> context.convertDipToPx(this)
-            is ScaledPixels -> context.convertSpToPx(this)
-            is PointPixels -> context.convertPtToPx(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = Pixels::class,
-                message = "Cannot convert unknown type to ${Pixels::class}."
-            )
-        }
-
-    override fun ScreenDimensionUnit.toDip() =
-        when (this) {
-            is DependencyIndependentPixels -> this
-            is Pixels -> context.convertPxToDip(this)
-            is ScaledPixels -> context.convertSpToDip(this)
-            is PointPixels -> context.convertPtToDip(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = DependencyIndependentPixels::class,
-                message = "Cannot convert unknown type to ${DependencyIndependentPixels::class}."
-            )
-        }
-
-    override fun ScreenDimensionUnit.toSp() =
-        when (this) {
-            is ScaledPixels -> this
-            is DependencyIndependentPixels -> context.convertDipToSp(this)
-            is Pixels -> context.convertPxToSp(this)
-            is PointPixels -> context.convertPtToSp(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = ScaledPixels::class,
-                message = "Cannot convert unknown type to ${ScaledPixels::class}."
-            )
-        }
-
-    override fun ScreenDimensionUnit.toPt() =
-        when (this) {
-            is PointPixels -> this
-            is DependencyIndependentPixels -> context.convertDipToPt(this)
-            is ScaledPixels -> context.convertSpToPt(this)
-            is Pixels -> context.convertPxToPt(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = PointPixels::class,
-                message = "Cannot convert unknown type to ${PointPixels::class}."
-            )
-        }
+    override val ptToPxFactor =
+        context.resources.displayMetrics.densityDpi / ConversionFactorProvider.POINT_PIXELS_PER_INCH
 }
 
 inline fun <R> Context.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
-    conversionBlock(ContextScreenDimensionUnitConverter(this))
+    conversionBlock(BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(this)))
 
 inline fun <R> View.screenDimensionUnitConversion(conversionBlock: ScreenDimensionUnitConverter.() -> R): R =
-    conversionBlock(ContextScreenDimensionUnitConverter(context!!))
+    conversionBlock(BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(context!!)))
 
 inline fun <U : ScreenDimensionUnit, R : ScreenDimensionUnit> Context.convert(
     unit: U,
     conversionBlock: ScreenDimensionUnitConverter.(U) -> R
-): R = conversionBlock(ContextScreenDimensionUnitConverter(this), unit)
+): R = conversionBlock(BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(this)), unit)
 
 inline fun <U : ScreenDimensionUnit, R : ScreenDimensionUnit> View.convert(
     unit: U,
     conversionBlock: ScreenDimensionUnitConverter.(U) -> R
-): R = conversionBlock(ContextScreenDimensionUnitConverter(context), unit)
+): R = conversionBlock(BaseScreenDimensionUnitConverter(ContextConversionFactorProvider(context)), unit)
