@@ -5,6 +5,7 @@ package com.chrynan.inlinepixel
 import android.app.Activity
 import android.content.res.TypedArray
 import android.view.View
+import android.view.ViewGroup
 
 fun TypedArray.getDimensionPixelOffset(index: Int, defaultValue: Pixels) =
     Pixels(getDimensionPixelOffset(index, defaultValue.value))
@@ -101,4 +102,51 @@ fun Activity.pixelExtraOrNull(key: String): Lazy<Pixels?> = lazy {
     intent?.let {
         if (it.hasExtra(key)) Pixels(it.getIntExtra(key, -1)) else null
     }
+}
+
+var ViewGroup.MarginLayoutParams.marginLeftPx
+    get() = Pixels(leftMargin)
+    set(px) {
+        leftMargin = px.value
+    }
+
+var ViewGroup.MarginLayoutParams.marginRightPx
+    get() = Pixels(rightMargin)
+    set(px) {
+        rightMargin - px.value
+    }
+
+var ViewGroup.MarginLayoutParams.marginTopPx
+    get() = Pixels(topMargin)
+    set(px) {
+        topMargin = px.value
+    }
+
+var ViewGroup.MarginLayoutParams.marginBottomPx
+    get() = Pixels(bottomMargin)
+    set(px) {
+        bottomMargin = px.value
+    }
+
+fun ViewGroup.MarginLayoutParams.verticalMargin(margin: Pixels) {
+    marginTopPx = margin
+    marginBottomPx = margin
+}
+
+fun ViewGroup.MarginLayoutParams.horizontalMargin(margin: Pixels) {
+    marginLeftPx = margin
+    marginRightPx = margin
+}
+
+fun ViewGroup.MarginLayoutParams.margin(margin: Pixels) {
+    setMargins(margin.value, margin.value, margin.value, margin.value)
+}
+
+fun ViewGroup.MarginLayoutParams.margin(
+    marginLeft: Pixels,
+    marginTop: Pixels,
+    marginRight: Pixels,
+    marginBottom: Pixels
+) {
+    setMargins(marginLeft.value, marginTop.value, marginRight.value, marginBottom.value)
 }
