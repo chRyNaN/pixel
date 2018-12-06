@@ -42,17 +42,21 @@ val View.minimumWidthPx
 val View.minimumHeightPx
     get() = Pixels(minimumHeight)
 
-val View.paddingLeftPx
+var View.paddingLeftPx
     get() = Pixels(paddingLeft)
+    set(px) = setPadding(px.value, paddingTop, paddingRight, paddingBottom)
 
-val View.paddingRightPx
+var View.paddingRightPx
     get() = Pixels(paddingRight)
+    set(px) = setPadding(paddingLeft, paddingTop, px.value, paddingBottom)
 
-val View.paddingTopPx
+var View.paddingTopPx
     get() = Pixels(paddingTop)
+    set(px) = setPadding(paddingLeft, px.value, paddingRight, paddingBottom)
 
-val View.paddingBottomPx
+var View.paddingBottomPx
     get() = Pixels(paddingBottom)
+    set(px) = setPadding(paddingLeft, paddingTop, paddingRight, px.value)
 
 val View.scrollBarSizePx
     get() = Pixels(scrollBarSize)
@@ -71,6 +75,24 @@ val View.verticalScrollbarPositionPx
 
 val View.verticalScrollbarWidthPx
     get() = Pixels(verticalScrollbarWidth)
+
+fun View.verticalPadding(px: Pixels) {
+    paddingTopPx = px
+    paddingBottomPx = px
+}
+
+fun View.horizontalPadding(px: Pixels) {
+    paddingLeftPx = px
+    paddingRightPx = px
+}
+
+fun View.padding(px: Pixels) {
+    setPadding(px.value, px.value, px.value, px.value)
+}
+
+fun View.padding(left: Pixels, top: Pixels, right: Pixels, bottom: Pixels) {
+    setPadding(left.value, top.value, right.value, bottom.value)
+}
 
 fun Activity.pixelExtra(key: String, defaultValue: Pixels) =
     lazy { Pixels(intent?.getIntExtra(key, defaultValue.value) ?: defaultValue.value) }
