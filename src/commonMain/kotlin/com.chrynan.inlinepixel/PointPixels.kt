@@ -2,26 +2,6 @@
 
 package com.chrynan.inlinepixel
 
-/**
- * A single [PointPixels] is 1/72 of a physical inch.
- */
-class PointPixels(val value: Int) : ScreenDimensionUnit,
-    Comparable<PointPixels> {
-
-    override val isConstantPhysicalSize
-        get() = true
-
-    override val isDensityIndependent
-        get() = true
-
-    val pointPixelsPerInch
-        get() = ConversionFactorProvider.POINT_PIXELS_PER_INCH
-
-    override fun compareTo(other: PointPixels): Int = value.compareTo(other.value)
-
-    override fun toString() = "{PointPixels: $value}"
-}
-
 fun pointPixel() = PointPixels(1)
 
 fun pointPixels(value: Number) = value.asPointPixels()

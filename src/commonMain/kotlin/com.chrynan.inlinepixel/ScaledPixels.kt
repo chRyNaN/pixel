@@ -2,23 +2,6 @@
 
 package com.chrynan.inlinepixel
 
-/**
- * Represents a Scaled Pixel, similar to Android's Sp values.
- */
-class ScaledPixels(val value: Int) : ScreenDimensionUnit,
-    Comparable<ScaledPixels> {
-
-    override val isConstantPhysicalSize
-        get() = false
-
-    override val isDensityIndependent
-        get() = true
-
-    override fun compareTo(other: ScaledPixels): Int = value.compareTo(other.value)
-
-    override fun toString() = "{ScaledPixels: $value}"
-}
-
 fun scaledPixel() = ScaledPixels(1)
 
 fun scaledPixels(value: Number) = value.asScaledPixels()

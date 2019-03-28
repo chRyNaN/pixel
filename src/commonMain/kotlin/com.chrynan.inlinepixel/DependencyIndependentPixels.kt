@@ -1,22 +1,5 @@
 package com.chrynan.inlinepixel
 
-/**
- * Represents a Device Independent Pixel similar to Android's Dip/Dp values.
- */
-class DependencyIndependentPixels(val value: Int) : ScreenDimensionUnit,
-    Comparable<DependencyIndependentPixels> {
-
-    override val isConstantPhysicalSize
-        get() = false
-
-    override val isDensityIndependent
-        get() = true
-
-    override fun compareTo(other: DependencyIndependentPixels): Int = value.compareTo(other.value)
-
-    override fun toString() = "{DependencyIndependentPixels: $value}"
-}
-
 fun dependencyIndependentPixel() = DependencyIndependentPixels(1)
 
 fun dependencyIndependentPixels(value: Number) = value.asDependencyIndependentPixels()

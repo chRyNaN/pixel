@@ -2,23 +2,6 @@
 
 package com.chrynan.inlinepixel
 
-/**
- * Represents Physical Pixels for a device's screen.
- */
-class Pixels(val value: Int) : ScreenDimensionUnit,
-    Comparable<Pixels> {
-
-    override val isConstantPhysicalSize
-        get() = false
-
-    override val isDensityIndependent
-        get() = false
-
-    override fun compareTo(other: Pixels): Int = value.compareTo(other.value)
-
-    override fun toString() = "{Pixels: $value}"
-}
-
 fun pixel() = Pixels(1)
 
 fun pixels(value: Number) = value.asPixels()
