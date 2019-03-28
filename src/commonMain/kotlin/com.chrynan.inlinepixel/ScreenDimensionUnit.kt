@@ -1,6 +1,6 @@
 package com.chrynan.inlinepixel
 
-sealed class ScreenDimensionUnit {
+sealed class ScreenDimensionUnit(val value: Int) {
 
     abstract val isConstantPhysicalSize: Boolean
 
@@ -10,7 +10,7 @@ sealed class ScreenDimensionUnit {
 /**
  * Represents Physical Pixels for a device's screen.
  */
-class Pixels(val value: Int) : ScreenDimensionUnit(),
+class Pixels(value: Int) : ScreenDimensionUnit(value),
     Comparable<Pixels> {
 
     override val isConstantPhysicalSize
@@ -27,7 +27,7 @@ class Pixels(val value: Int) : ScreenDimensionUnit(),
 /**
  * A single [PointPixels] is 1/72 of a physical inch.
  */
-class PointPixels(val value: Int) : ScreenDimensionUnit(),
+class PointPixels(value: Int) : ScreenDimensionUnit(value),
     Comparable<PointPixels> {
 
     override val isConstantPhysicalSize
@@ -47,7 +47,7 @@ class PointPixels(val value: Int) : ScreenDimensionUnit(),
 /**
  * Represents a Scaled Pixel, similar to Android's Sp values.
  */
-class ScaledPixels(val value: Int) : ScreenDimensionUnit(),
+class ScaledPixels(value: Int) : ScreenDimensionUnit(value),
     Comparable<ScaledPixels> {
 
     override val isConstantPhysicalSize
@@ -64,7 +64,7 @@ class ScaledPixels(val value: Int) : ScreenDimensionUnit(),
 /**
  * Represents a Device Independent Pixel similar to Android's Dip/Dp values.
  */
-class DependencyIndependentPixels(val value: Int) : ScreenDimensionUnit(),
+class DependencyIndependentPixels(value: Int) : ScreenDimensionUnit(value),
     Comparable<DependencyIndependentPixels> {
 
     override val isConstantPhysicalSize
