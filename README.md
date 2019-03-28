@@ -1,43 +1,28 @@
-# inline-pixel
+# pixel
 
-## Kotlin Inline Classes for Android Screen Dimension Units
+## Kotlin Classes for Screen Dimension Units
 
-I was messing around with the new Kotlin Inline Class feature and came up with this library.
-
-This library provides type safety over screen units, such as pixels, while being just as performant as using Kotlin primitives by taking advantage of the new Kotlin Inline Classes. Available `ScreenDimensionUnits` interface implementations include:
+This Kotlin Multi-platform library provides type safety over screen units, such as pixels. Available `ScreenDimensionUnits` interface implementations include:
 * Pixels (PX)
 * DependencyIndependentPixels (DIP/DP)
 * ScaledPixels (SP)
 * PointPixels (PT)
 
-This provides type safety of knowing what you are working with (ex: `fun drawLine(start: Pixels, end: Pixels)`) while still maintaining performance (because Kotlin Inline Classes are compiled down to using the wrapped primitive internally).
+This provides type safety of knowing what you are working with (ex: `fun drawLine(start: Pixels, end: Pixels)`).
+
+**Note:** This library used to use Kotlin's Inline Class Experimental feature. This allowed it to maintain performance. However, due to issues with the new Kotlin Multi-platform Structure, the inline classes were dropped. This support may come back in a future release if the issues are solved.
 
 ## Building the library
 
-[![](https://jitpack.io/v/chRyNaN/inline-pixel.svg)](https://jitpack.io/#chRyNaN/inline-pixel)
+[![](https://jitpack.io/v/chRyNaN/inline-pixel.svg)](https://jitpack.io/#chRyNaN/pixel)
 
-**Kotlin Common Inline Classes:**
-```groovy
-implementation 'com.github.chRyNaN.inline-pixel:common:VERSION'
-```
+This project is provided by [JitPack](https://jitpack.io/#chRyNaN/pixel). **Note:** that there are some issues with Kotlin Multi-platform dependencies and JitPack, so the dependencies may not resolve correctly.
 
-**Common JVM:**
 ```groovy
-implementation 'com.github.chRyNaN.inline-pixel:common-jvm:VERSION'
-```
-
-**Common JS:**
-```groovy
-implementation 'com.github.chRyNaN.inline-pixel:common-js:VERSION'
-```
-
-**Android Conversions and Utilities:**
-```groovy
-implementation 'com.github.chRyNaN.inline-pixel:android:VERSION'
+implementation 'com.github.chRyNaN.pixel:VERSION'
 ```
 
 ## Using the library
-
 
 Simply use the class that represents the value needed for type safety:
 
@@ -51,6 +36,8 @@ Easily convert Kotlin `Numbers` to a `ScreenDimensionUnit`:
 val scaledPixels = 25.asScaledPixels()
 // Or
 val otherScaledPixels = 100.asSp()
+
+// Note: currently a ScreenDimensionUnit is represented by an Int value
 ```
 
 Instantiating an instance:
@@ -94,6 +81,27 @@ Better conversions syntax within an implementation of the `ScreenDimensionUnitCo
 
 ```kotlin
 class Presenter(private val context) : ScreenDimensionUnitConverter by ContextScreenDimensionUnitConverter(context){
+
+    fun testConversions() {
+        px(2).toDip()
+        sp(5).toPt()
+    }
+}
+```
+
+Even better conversions anywhere within the app when Pixels is initialized correctly
+
+```kotlin
+class MyApplication : Application() {
+
+    fun onCreate() {
+        super.onCreate()
+        
+        Pixels.converter = ContextScreenDimensionUnitConverter(this)
+    }
+}
+
+class MyPresenter {
 
     fun testConversions() {
         px(2).toDip()
