@@ -62,11 +62,6 @@ fun Resources.convertToPx(unit: ScreenDimensionUnit) =
         is DependencyIndependentPixels -> convertDipToPx(unit)
         is ScaledPixels -> convertSpToPx(unit)
         is PointPixels -> convertPtToPx(unit)
-        else -> throw UnsupportedConversionException(
-            classToConvert = this::class,
-            conversionType = Pixels::class,
-            message = "Cannot convert unknown type to ${Pixels::class}."
-        )
     }
 
 fun Context.convertToDip(unit: ScreenDimensionUnit) = resources.convertToDip(unit)
@@ -77,11 +72,6 @@ fun Resources.convertToDip(unit: ScreenDimensionUnit) =
         is Pixels -> convertPxToDip(unit)
         is ScaledPixels -> convertSpToDip(unit)
         is PointPixels -> convertPtToDip(unit)
-        else -> throw UnsupportedConversionException(
-            classToConvert = this::class,
-            conversionType = DependencyIndependentPixels::class,
-            message = "Cannot convert unknown type to ${DependencyIndependentPixels::class}."
-        )
     }
 
 fun Context.convertToSp(unit: ScreenDimensionUnit) = resources.convertToSp(unit)
@@ -92,11 +82,6 @@ fun Resources.convertToSp(unit: ScreenDimensionUnit) =
         is DependencyIndependentPixels -> convertDipToSp(unit)
         is Pixels -> convertPxToSp(unit)
         is PointPixels -> convertPtToSp(unit)
-        else -> throw UnsupportedConversionException(
-            classToConvert = this::class,
-            conversionType = ScaledPixels::class,
-            message = "Cannot convert unknown type to ${ScaledPixels::class}."
-        )
     }
 
 fun Context.convertToPt(unit: ScreenDimensionUnit) = resources.convertToPt(unit)
@@ -107,11 +92,6 @@ fun Resources.convertToPt(unit: ScreenDimensionUnit) =
         is DependencyIndependentPixels -> convertDipToPt(unit)
         is ScaledPixels -> convertSpToPt(unit)
         is Pixels -> convertPxToPt(unit)
-        else -> throw UnsupportedConversionException(
-            classToConvert = this::class,
-            conversionType = PointPixels::class,
-            message = "Cannot convert unknown type to ${PointPixels::class}."
-        )
     }
 
 class ContextConversionFactorProvider(context: Context) : ConversionFactorProvider {

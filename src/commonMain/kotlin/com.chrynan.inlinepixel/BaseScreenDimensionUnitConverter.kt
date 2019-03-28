@@ -11,11 +11,6 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             is DependencyIndependentPixels -> convertDipToPx(this)
             is ScaledPixels -> convertSpToPx(this)
             is PointPixels -> convertPtToPx(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = Pixels::class,
-                message = "Cannot convert unknown type to ${Pixels::class}."
-            )
         }
 
     override fun ScreenDimensionUnit.toDip() =
@@ -24,11 +19,6 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             is Pixels -> convertPxToDip(this)
             is ScaledPixels -> convertSpToDip(this)
             is PointPixels -> convertPtToDip(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = DependencyIndependentPixels::class,
-                message = "Cannot convert unknown type to ${DependencyIndependentPixels::class}."
-            )
         }
 
     override fun ScreenDimensionUnit.toSp() =
@@ -37,11 +27,6 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             is DependencyIndependentPixels -> convertDipToSp(this)
             is Pixels -> convertPxToSp(this)
             is PointPixels -> convertPtToSp(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = ScaledPixels::class,
-                message = "Cannot convert unknown type to ${ScaledPixels::class}."
-            )
         }
 
     override fun ScreenDimensionUnit.toPt() =
@@ -50,11 +35,6 @@ open class BaseScreenDimensionUnitConverter(private val converterFactorProvider:
             is DependencyIndependentPixels -> convertDipToPt(this)
             is ScaledPixels -> convertSpToPt(this)
             is Pixels -> convertPxToPt(this)
-            else -> throw UnsupportedConversionException(
-                classToConvert = this::class,
-                conversionType = PointPixels::class,
-                message = "Cannot convert unknown type to ${PointPixels::class}."
-            )
         }
 
     private fun convertDipToPx(dip: DependencyIndependentPixels) =
