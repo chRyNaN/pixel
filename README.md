@@ -89,7 +89,7 @@ class Presenter(private val context) : ScreenDimensionUnitConverter by ContextSc
 }
 ```
 
-Even better conversions anywhere within the app when Pixels is initialized correctly
+Even better conversions anywhere within the app when the `Pixel` object is initialized correctly
 
 ```kotlin
 class MyApplication : Application() {
@@ -97,7 +97,7 @@ class MyApplication : Application() {
     fun onCreate() {
         super.onCreate()
         
-        Pixels.converter = ContextScreenDimensionUnitConverter(this)
+        Pixel.converter = ContextScreenDimensionUnitConverter(this)
     }
 }
 
