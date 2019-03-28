@@ -5,7 +5,7 @@ package com.chrynan.inlinepixel
 /**
  * A single [PointPixels] is 1/72 of a physical inch.
  */
-inline class PointPixels(val value: Int) : ScreenDimensionUnit,
+class PointPixels(val value: Int) : ScreenDimensionUnit,
     Comparable<PointPixels> {
 
     override val isConstantPhysicalSize

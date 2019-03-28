@@ -5,7 +5,7 @@ package com.chrynan.inlinepixel
 /**
  * Represents a Scaled Pixel, similar to Android's Sp values.
  */
-inline class ScaledPixels(val value: Int) : ScreenDimensionUnit,
+class ScaledPixels(val value: Int) : ScreenDimensionUnit,
     Comparable<ScaledPixels> {
 
     override val isConstantPhysicalSize

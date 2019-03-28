@@ -1,5 +1,13 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+}
+
 rootProject.name = 'inline-pixel'
-include ':common'
-include ':common-jvm'
-include ':common-js'
-include ':android'
+
+enableFeaturePreview('GRADLE_METADATA')
