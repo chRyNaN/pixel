@@ -64,8 +64,8 @@ android {
 kotlin {
     targets {
         // iOS
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")                 \
-                                              ? presets.iosArm64 : presets.iosX64
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")                   \
+                                                ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
@@ -75,6 +75,8 @@ kotlin {
 
         // Android
         fromPreset(presets.android, 'android')
+
+        jvm()
     }
     android {
         publishLibraryVariants("release", "debug")
@@ -105,6 +107,11 @@ kotlin {
         iosMain {
         }
         iosTest {
+        }
+        jvmMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+            }
         }
     }
 }
