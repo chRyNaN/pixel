@@ -72,7 +72,7 @@ kotlin {
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework('inlinepixel')
+                framework('pixel')
             }
         }
 
@@ -116,7 +116,7 @@ configurations {
 task packForXCode(type: Sync) {
     final File frameworkDir = new File(buildDir, "xcode-frameworks")
     final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
-    final def framework = kotlin.targets.ios.binaries.getFramework("inlinepixel", mode)
+    final def framework = kotlin.targets.ios.binaries.getFramework("pixel", mode)
 
     inputs.property "mode", mode
     dependsOn framework.linkTask

@@ -8,6 +8,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'inline-pixel'
+rootProject.name = 'pixel'
 
 enableFeaturePreview('GRADLE_METADATA')
