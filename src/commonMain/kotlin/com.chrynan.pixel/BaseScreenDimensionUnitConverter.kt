@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.chrynan.inlinepixel
+package com.chrynan.pixel
 
 open class BaseScreenDimensionUnitConverter(private val converterFactorProvider: ConversionFactorProvider) :
     ScreenDimensionUnitConverter {

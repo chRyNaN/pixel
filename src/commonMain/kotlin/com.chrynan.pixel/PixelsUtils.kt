@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.chrynan.inlinepixel
+package com.chrynan.pixel
 
 fun pixel() = Pixels(1)
 

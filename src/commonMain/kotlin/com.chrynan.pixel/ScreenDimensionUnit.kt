@@ -1,4 +1,4 @@
-package com.chrynan.inlinepixel
+package com.chrynan.pixel
 
 sealed class ScreenDimensionUnit(val value: Int) {
 

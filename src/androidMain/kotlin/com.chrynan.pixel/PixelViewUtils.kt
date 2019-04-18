@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.chrynan.inlinepixel
+package com.chrynan.pixel
 
 import android.app.Activity
 import android.content.res.TypedArray

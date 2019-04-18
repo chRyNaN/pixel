@@ -1,4 +1,4 @@
-package com.chrynan.inlinepixel
+package com.chrynan.pixel
 
 object Pixel {
 
