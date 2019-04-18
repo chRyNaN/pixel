@@ -28,7 +28,7 @@ repositories {
 }
 
 ext {
-    libraryVersion = '0.2.0'
+    libraryVersion = '0.3.0'
     libraryVersionCode = 1
 }
 
