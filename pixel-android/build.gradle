@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'digital.wup.android-maven-publish'
+
+group rootProject.ext.libraryGroup
+version rootProject.ext.libraryVersion
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode rootProject.ext.libraryVersionCode
+        versionName rootProject.ext.libraryVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api project(':pixel-core')
+}
+
+publishing {
+    publications {
+        BintrayPub(MavenPublication) {
+            from(components.android)
+            artifactId 'pixel-android'
+        }
+    }
+}
