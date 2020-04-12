@@ -1,7 +1,17 @@
 package com.chrynan.pixel
 
 /**
- * A single [PointPixels] is 1/72 of a physical inch.
+ * A [ScreenDimensionUnit] that represents a point pixel for a device's screen. A point pixel is a pixel value that is
+ * dependent on the device's physical size. A single [PointPixels] is 1/72 of a physical inch.
+ *
+ * Note that some target platforms, operating systems, and devices may not provide access to the physical size of a
+ * device, or a density value to obtain the physical size of a device. In such cases, this value may either be in
+ * reference to [Pixels] or equivalent to [Pixels].
+ *
+ * @see [ScreenDimensionUnit] for more information.
+ * @see [Pixels] for more information.
+ *
+ * @author chRyNaN
  */
 inline class PointPixels(override val value: Double) : ScreenDimensionUnit,
     Comparable<PointPixels> {

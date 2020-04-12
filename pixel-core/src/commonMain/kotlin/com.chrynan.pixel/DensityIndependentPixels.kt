@@ -1,7 +1,12 @@
 package com.chrynan.pixel
 
 /**
- * Represents a Density Independent Pixel similar to Android's Dip/Dp values.
+ * A [ScreenDimensionUnit] that represents a density independent pixel similar to Android's Dip/Dp values.
+ *
+ * @see [ScreenDimensionUnit] for more information.
+ * @see [Pixels] for more information.
+ *
+ * @author chRyNaN
  */
 inline class DensityIndependentPixels(override val value: Double) : ScreenDimensionUnit,
     Comparable<DensityIndependentPixels> {

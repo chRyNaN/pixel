@@ -1,7 +1,12 @@
-@file:Suppress("unused")
-
 package com.chrynan.pixel
 
+/**
+ * A base implementation of the [ScreenDimensionUnitConverter] interface. This class handles most of the conversion
+ * logic by using the factors from the provided [converterFactorProvider]. This simplifies the process of creating
+ * [ScreenDimensionUnitConverter]s.
+ *
+ * @author chRyNaN
+ */
 open class BaseScreenDimensionUnitConverter(private val converterFactorProvider: ConversionFactorProvider) :
     ScreenDimensionUnitConverter {
 

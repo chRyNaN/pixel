@@ -1,7 +1,15 @@
 package com.chrynan.pixel
 
 /**
- * Represents Physical Pixels for a device's screen.
+ * A [ScreenDimensionUnit] that represents pixels for a device's screen.
+ *
+ * Note that this could refer to physical pixels or "virtual" pixels, such as, Javascript's CSS Pixel, for a display.
+ * This depends on what the target platform, OS, and device supports. This could also lead to the same [Number] value
+ * in multiple different [ScreenDimensionUnit]s, such as [Pixels] and [DensityIndependentPixels], being the same.
+ *
+ * @see [ScreenDimensionUnit] for more information.
+ *
+ * @author chRyNaN
  */
 inline class Pixels(override val value: Double) : ScreenDimensionUnit,
     Comparable<Pixels> {

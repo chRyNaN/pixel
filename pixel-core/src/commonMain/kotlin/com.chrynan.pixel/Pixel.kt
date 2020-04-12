@@ -3,6 +3,8 @@ package com.chrynan.pixel
 /**
  * A Kotlin object used for converting between different [ScreenDimensionUnit]s using the
  * [ScreenDimensionUnitConverter] property.
+ *
+ * @author chRyNaN
  */
 object Pixel {
 

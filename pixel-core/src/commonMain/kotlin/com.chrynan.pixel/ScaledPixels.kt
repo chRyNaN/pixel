@@ -1,7 +1,12 @@
 package com.chrynan.pixel
 
 /**
- * Represents a Scaled Pixel, similar to Android's Sp values.
+ * A [ScreenDimensionUnit] that represents a Scaled Pixel, similar to Android's Sp values.
+ *
+ * @see [ScreenDimensionUnit] for more information.
+ * @see [Pixels] for more information.
+ *
+ * @author chRyNaN
  */
 inline class ScaledPixels(override val value: Double) : ScreenDimensionUnit,
     Comparable<ScaledPixels> {
