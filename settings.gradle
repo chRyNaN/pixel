@@ -2,5 +2,6 @@ rootProject.name = 'pixel'
 
 include ":pixel-core"
 include ":pixel-android"
+include ":pixel-android-compose"
 
 enableFeaturePreview('GRADLE_METADATA')
