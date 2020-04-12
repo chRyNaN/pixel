@@ -48,6 +48,11 @@ implementation 'com.chrynan.pixel:pixel-core-js:VERSION'
 implementation 'com.chrynan.pixel:pixel-android:VERSION'
 ```
 
+**Android Jetpack Compose Library:**
+```groovy
+implementation 'com.chrynan.pixel:pixel-android-compose:VERSION'
+```
+
 ## Using the library
 
 * Setup the `ScreenDimensionUnitConverter` on the `Pixel` object.
@@ -81,3 +86,13 @@ val pixelSum = 10.px + 20.px
 if (pixels > 150.px) { }
 ```
 
+## Converting between Android Jetpack Compose Values
+The Android Jetpack Compose framework comes with representations of `Dp` and `Px` values. This `pixel-android-compose` library provides ways to convert to and from the Android Jetpack Compose values.
+
+```kotlin
+val composePx = pxValue.inComposePx
+val composeDp = dpValue.inComposeDp
+
+val px = composePx.inPx
+val dp = composeDp.inDp
+```
