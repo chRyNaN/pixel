@@ -21,11 +21,11 @@ package com.chrynan.pixel
 interface ScreenDimensionUnit {
 
     /**
-     * The underlying [Double] representing this [ScreenDimensionUnit].
+     * The underlying [Float] representing this [ScreenDimensionUnit].
      *
      * @author chRyNaN
      */
-    val value: Double
+    val value: Float
 
     /**
      * The [ScreenDimensionType] of this [ScreenDimensionUnit].

@@ -5,14 +5,14 @@ package com.chrynan.pixel
  *
  * @author chRyNaN
  */
-val Number.pointPixels: PointPixels get() = PointPixels(this.toDouble())
+val Number.pointPixels: PointPixels get() = PointPixels(this.toFloat())
 
 /**
  * An alias property for [pointPixels]. Retrieves a [PointPixels] representation of this [Number] value.
  *
  * @author chRyNaN
  */
-val Number.pt: PointPixels get() = PointPixels(this.toDouble())
+val Number.pt: PointPixels get() = PointPixels(this.toFloat())
 
 operator fun PointPixels.plus(other: PointPixels): PointPixels = PointPixels(value + other.value)
 
@@ -28,25 +28,25 @@ operator fun PointPixels.unaryPlus(): PointPixels = PointPixels(+value)
 
 operator fun PointPixels.unaryMinus(): PointPixels = PointPixels(-value)
 
-operator fun PointPixels.plus(other: Number): PointPixels = PointPixels(value + other.toDouble())
+operator fun PointPixels.plus(other: Number): PointPixels = PointPixels(value + other.toFloat())
 
-operator fun PointPixels.minus(other: Number): PointPixels = PointPixels(value - other.toDouble())
+operator fun PointPixels.minus(other: Number): PointPixels = PointPixels(value - other.toFloat())
 
-operator fun PointPixels.times(other: Number): PointPixels = PointPixels(value * other.toDouble())
+operator fun PointPixels.times(other: Number): PointPixels = PointPixels(value * other.toFloat())
 
-operator fun PointPixels.div(other: Number): PointPixels = PointPixels(value / other.toDouble())
+operator fun PointPixels.div(other: Number): PointPixels = PointPixels(value / other.toFloat())
 
-operator fun PointPixels.rem(other: Number): PointPixels = PointPixels(value % other.toDouble())
+operator fun PointPixels.rem(other: Number): PointPixels = PointPixels(value % other.toFloat())
 
-operator fun Number.plus(other: PointPixels): PointPixels = PointPixels(toDouble() + other.value)
+operator fun Number.plus(other: PointPixels): PointPixels = PointPixels(toFloat() + other.value)
 
-operator fun Number.minus(other: PointPixels): PointPixels = PointPixels(toDouble() - other.value)
+operator fun Number.minus(other: PointPixels): PointPixels = PointPixels(toFloat() - other.value)
 
-operator fun Number.times(other: PointPixels): PointPixels = PointPixels(toDouble() * other.value)
+operator fun Number.times(other: PointPixels): PointPixels = PointPixels(toFloat() * other.value)
 
-operator fun Number.div(other: PointPixels): PointPixels = PointPixels(toDouble() / other.value)
+operator fun Number.div(other: PointPixels): PointPixels = PointPixels(toFloat() / other.value)
 
-operator fun Number.rem(other: PointPixels): PointPixels = PointPixels(toDouble() % other.value)
+operator fun Number.rem(other: PointPixels): PointPixels = PointPixels(toFloat() % other.value)
 
 fun min(a: PointPixels, b: PointPixels): PointPixels = PointPixels(kotlin.math.min(a.value, b.value))
 
@@ -59,7 +59,7 @@ fun PointPixels.coerceAtLeast(min: PointPixels): PointPixels = PointPixels(value
 
 fun PointPixels.coerceAtMost(max: PointPixels): PointPixels = PointPixels(value.coerceAtMost(max.value))
 
-fun PointPixels.isFinite(): Boolean = value != Double.POSITIVE_INFINITY
+fun PointPixels.isFinite(): Boolean = value != Float.POSITIVE_INFINITY
 
-fun PointPixels.isInfinite(): Boolean = value == Double.POSITIVE_INFINITY
+fun PointPixels.isInfinite(): Boolean = value == Float.POSITIVE_INFINITY
 

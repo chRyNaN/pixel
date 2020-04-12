@@ -13,7 +13,7 @@ package com.chrynan.pixel
  *
  * @author chRyNaN
  */
-inline class PointPixels(override val value: Double) : ScreenDimensionUnit,
+inline class PointPixels(override val value: Float) : ScreenDimensionUnit,
     Comparable<PointPixels> {
 
     override val type: ScreenDimensionType

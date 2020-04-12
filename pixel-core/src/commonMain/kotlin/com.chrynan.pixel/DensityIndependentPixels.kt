@@ -8,7 +8,7 @@ package com.chrynan.pixel
  *
  * @author chRyNaN
  */
-inline class DensityIndependentPixels(override val value: Double) : ScreenDimensionUnit,
+inline class DensityIndependentPixels(override val value: Float) : ScreenDimensionUnit,
     Comparable<DensityIndependentPixels> {
 
     override val type: ScreenDimensionType

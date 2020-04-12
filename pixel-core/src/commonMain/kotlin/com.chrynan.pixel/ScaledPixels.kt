@@ -8,7 +8,7 @@ package com.chrynan.pixel
  *
  * @author chRyNaN
  */
-inline class ScaledPixels(override val value: Double) : ScreenDimensionUnit,
+inline class ScaledPixels(override val value: Float) : ScreenDimensionUnit,
     Comparable<ScaledPixels> {
 
     override val type: ScreenDimensionType
