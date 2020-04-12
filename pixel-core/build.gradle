@@ -7,6 +7,7 @@ version rootProject.libraryVersion
 kotlin {
     targets {
         jvm()
+        js()
     }
     sourceSets {
         commonMain {
@@ -17,6 +18,11 @@ kotlin {
         jvmMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+            }
+        }
+        jsMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
             }
         }
         all {
@@ -36,6 +42,9 @@ publishing {
         }
         jvm {
             artifactId = "pixel-core-jvm"
+        }
+        js {
+            artifactId = "pixel-core-js"
         }
         metadata {
             artifactId = "pixel-core-metadata"

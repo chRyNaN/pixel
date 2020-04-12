@@ -40,7 +40,9 @@ implementation 'com.chrynan.pixel:pixel-android:VERSION'
 
 ## Using the library
 
-* Setup the `ScreenDimensionUnitConverter` on the `Pixel` object:
+* Setup the `ScreenDimensionUnitConverter` on the `Pixel` object.
+
+**Android:**
 ```kotlin
 class MyApplication : Application {
 
@@ -52,6 +54,11 @@ class MyApplication : Application {
 }
 ```
 
+**Kotlin JS:**
+```kotlin
+Pixel.converter = JsScreenDimensionUnitConverter()
+```
+
 * Convert any Kotlin `Number` to a particular `ScreenDimensionUnit`:
 ```kotlin
 val pixels = 100.0.px
@@ -60,5 +67,7 @@ val densityIndependentPixels = 12f.dp
 val pointPixels = 5L.pt
 
 val pixelSum = 10.px + 20.px
+
+if (pixels > 150.px) { }
 ```
 
