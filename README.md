@@ -33,6 +33,16 @@ repositories {
 implementation 'com.chrynan.pixel:pixel-core:VERSION'
 ```
 
+**Base Kotlin JVM Library:**
+```groovy
+implementation 'com.chrynan.pixel:pixel-core-jvm:VERSION'
+```
+
+**Base Kotlin JS Library:**
+```groovy
+implementation 'com.chrynan.pixel:pixel-core-js:VERSION'
+```
+
 **Android Library:**
 ```groovy
 implementation 'com.chrynan.pixel:pixel-android:VERSION'
