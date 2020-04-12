@@ -4,7 +4,7 @@ interface ScreenDimensionUnitConverter {
 
     fun ScreenDimensionUnit.toPx(): Pixels
 
-    fun ScreenDimensionUnit.toDip(): DependencyIndependentPixels
+    fun ScreenDimensionUnit.toDip(): DensityIndependentPixels
 
     fun ScreenDimensionUnit.toSp(): ScaledPixels
 

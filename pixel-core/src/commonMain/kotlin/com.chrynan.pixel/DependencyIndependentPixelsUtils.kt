@@ -1,101 +1,35 @@
 package com.chrynan.pixel
 
-fun dependencyIndependentPixel() = DependencyIndependentPixels(1)
+/**
+ * Retrieves a [DensityIndependentPixels] representation of this [Number] value.
+ *
+ * @author chRyNaN
+ */
+val Number.densityIndependentPixels get() = DensityIndependentPixels(this.toDouble())
 
-fun dependencyIndependentPixels(value: Number) = value.asDependencyIndependentPixels()
+/**
+ * An alias property for [densityIndependentPixels]. Retrieves a [DensityIndependentPixels] representation of this
+ * [Number] value.
+ *
+ * @author chRyNaN
+ */
+val Number.dp get() = DensityIndependentPixels(this.toDouble())
 
-fun dip(value: Number = 1) = value.asDependencyIndependentPixels()
+operator fun DensityIndependentPixels.plus(other: DensityIndependentPixels) =
+    DensityIndependentPixels(value + other.value)
 
-fun Number.asDependencyIndependentPixels() = DependencyIndependentPixels(this.toInt())
+operator fun DensityIndependentPixels.minus(other: DensityIndependentPixels) =
+    DensityIndependentPixels(value - other.value)
 
-fun Number.asDip() = DependencyIndependentPixels(this.toInt())
+operator fun DensityIndependentPixels.times(other: DensityIndependentPixels) =
+    DensityIndependentPixels(value * other.value)
 
-operator fun DependencyIndependentPixels.plus(other: DependencyIndependentPixels) =
-    DependencyIndependentPixels(value + other.value)
+operator fun DensityIndependentPixels.div(other: DensityIndependentPixels) =
+    DensityIndependentPixels(value / other.value)
 
-operator fun DependencyIndependentPixels.minus(other: DependencyIndependentPixels) =
-    DependencyIndependentPixels(value - other.value)
+operator fun DensityIndependentPixels.rem(other: DensityIndependentPixels) =
+    DensityIndependentPixels(value % other.value)
 
-operator fun DependencyIndependentPixels.times(other: DependencyIndependentPixels) =
-    DependencyIndependentPixels(value * other.value)
+operator fun DensityIndependentPixels.unaryPlus() = DensityIndependentPixels(+value)
 
-operator fun DependencyIndependentPixels.div(other: DependencyIndependentPixels) =
-    DependencyIndependentPixels(value / other.value)
-
-operator fun DependencyIndependentPixels.rem(other: DependencyIndependentPixels) =
-    DependencyIndependentPixels(value % other.value)
-
-operator fun DependencyIndependentPixels.unaryPlus() = DependencyIndependentPixels(+value)
-
-operator fun DependencyIndependentPixels.unaryMinus() = DependencyIndependentPixels(-value)
-
-operator fun DependencyIndependentPixels.rangeTo(other: DependencyIndependentPixels) =
-    DependencyIndependentPixelsRange(this, other)
-
-infix fun DependencyIndependentPixels.until(to: DependencyIndependentPixels): DependencyIndependentPixelsRange {
-    if (to.value <= Int.MIN_VALUE) return DependencyIndependentPixelsRange.EMPTY
-    return this..(to - DependencyIndependentPixels(1))
-}
-
-infix fun DependencyIndependentPixels.untilIncluding(to: DependencyIndependentPixels): DependencyIndependentPixelsRange {
-    if (to.value <= Int.MIN_VALUE) return DependencyIndependentPixelsRange.EMPTY
-    return this..(to)
-}
-
-infix fun DependencyIndependentPixels.downTo(to: DependencyIndependentPixels) =
-    DependencyIndependentPixelsRange(start = this, endInclusive = to, step = DependencyIndependentPixels(-1))
-
-infix fun DependencyIndependentPixels.downToExcluding(to: DependencyIndependentPixels) =
-    DependencyIndependentPixelsRange(
-        start = this,
-        endInclusive = to - DependencyIndependentPixels(1),
-        step = DependencyIndependentPixels(-1)
-    )
-
-infix fun DependencyIndependentPixelsRange.step(newStep: DependencyIndependentPixels) =
-    DependencyIndependentPixelsRange(start = start, endInclusive = endInclusive, step = newStep)
-
-data class DependencyIndependentPixelsRange(
-    override val start: DependencyIndependentPixels,
-    override val endInclusive: DependencyIndependentPixels,
-    override val step: DependencyIndependentPixels = DependencyIndependentPixels(1)
-) : ClosedRange<DependencyIndependentPixels>,
-    Progression<DependencyIndependentPixels>,
-    Iterable<DependencyIndependentPixels> {
-
-    companion object {
-
-        val EMPTY = DependencyIndependentPixelsRange(DependencyIndependentPixels(1), DependencyIndependentPixels(0))
-    }
-
-    override val firstValue = start
-
-    override val lastSteppedValue =
-        DependencyIndependentPixels(getProgressionLastIntElement(start.value, endInclusive.value, step.value))
-
-    override fun iterator() =
-        DependencyIndependentPixelsProgressionIterator(first = start, last = endInclusive, step = step)
-}
-
-class DependencyIndependentPixelsProgressionIterator(
-    first: DependencyIndependentPixels,
-    last: DependencyIndependentPixels,
-    private val step: DependencyIndependentPixels
-) : Iterator<DependencyIndependentPixels> {
-    private val finalElement = last
-    private var hasNext: Boolean = if (step.value > 0) first <= last else first >= last
-    private var next = if (hasNext) first else finalElement
-
-    override fun hasNext(): Boolean = hasNext
-
-    override fun next(): DependencyIndependentPixels {
-        val value = next
-        if (value == finalElement) {
-            if (!hasNext) throw kotlin.NoSuchElementException()
-            hasNext = false
-        } else {
-            next += step
-        }
-        return value
-    }
-}
+operator fun DensityIndependentPixels.unaryMinus() = DensityIndependentPixels(-value)
