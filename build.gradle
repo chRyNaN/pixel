@@ -5,8 +5,8 @@ ext {
     libraryGroup = 'com.chrynan.time'
     libraryOwner = 'chrynan'
     libraryRepo = 'pixel'
-    libraryVersion = '0.3.0'
-    libraryVersionCode = 1
+    libraryVersion = '0.4.0'
+    libraryVersionCode = 2
     libraryVersionDescription = 'First Major Release'
     githubURL = 'https://github.com/chRyNaN/pixel.git'
 }
